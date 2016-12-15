@@ -12,7 +12,7 @@ class App extends Component {
           </div>
 
           <div className="jumbotron">
-            <h1>JS onbarding</h1>
+            <h1>JS onboarding</h1>
             <p className="lead">
               We will implement simple task using <a href="https://facebook.github.io/react/docs/hello-world.html">ReactJS</a> and later move on to refactor our app to use <a href="https://facebook.github.io/immutable-js/">Immutable</a> and <a href="http://redux.js.org/">Redux</a>.
             </p>
