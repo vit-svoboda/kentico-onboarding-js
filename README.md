@@ -3,25 +3,30 @@ Simple step-by-step task for Kentico Academy to learn the basics of JS, React, R
 
 This project will consist of two tasks. In first one we will implement simple list of editable items using ReactJS only. In the second part we will try to refactor our code to use ImmutableJS and ReduxJS. 
 
-The requirements for the resulting project are captured in `assignment.git`. Note that we will aim to make the solution generic enough so that more items can be in 'edit' mode at once.
+The requirements for the resulting project are captured in `assignment.gif`. Note that we will aim to make the solution generic enough so that more items can be in 'edit' mode at once.
 
 ## Forking the project and submitting pull requests
-You won't be added as a contributor to this repository. You have to fork it obtain your own copy to which you will commit your changes. Then, once you feel like you finish the task, you can submit a pull request to this repo. If you are not familiar with GitHub forking and pull requests, I suggest reading this article before you proceed any further: https://gun.io/blog/how-to-github-fork-branch-and-pull-request/.
+You won't be added as a contributor to this repository. You have to fork it to obtain your own copy to which you will commit your changes. Then, once you feel like you finished the task, you can submit a pull request to this repo. If you are not familiar with GitHub forking and pull requests, I suggest reading this article before you proceed any further: https://gun.io/blog/how-to-github-fork-branch-and-pull-request/.
 
 ### Fork step-by-step
 1. Go to https://github.com/Suzii/kentico-onboarding-js.
 2. Click **Fork**. This will create your own copy of the repository in your GitHub accout.
 3. In git bash:
  - `git clone http://github.com/your-login/kentico-onboarding-js` -- will init a local repo tracking your forked origin
+ - `cd kentico-onboarding-js` -- changes directory to cloned repo
  - `git remote add --track master upstream git://github.com/suzii/kentico-onboarding-js` -- adds the original repository you forked from as a remote named 'upstream' so that you can receive updates by merging from it
  - `git fetch upstream` -- receive latest code
  - `git merge upstream/master` -- merge it to your own master
  - you now have the latest upstream code in your local master branch
- - `git checkout -b <your-name>-develop` -- creates and checkouts new branch named `<your-name>-develop` where you should commit your code and later submit pull requests with this branch
+ - `git checkout -b develop` -- creates and checkouts new branch named `develop` where you can continously work on the assignment
+ - `git checkout -b features/task-1` -- crates and checkouts new branch named `features/task-1` based on develop. Commit all your progress on Task 1 to this branch. Once ready, you can merge this branch to develop using following commands
+  - `git checkout develop`
+  - `git merge features/task-1` -- now you have all the latest code in develop branch
+ - You can submit `pull-request` to the original repository. Please, always submit the pull request to the branch witch starts with your name/login. (I have to create it first, so if it's not there, let me know.)
 
 ### Development
 Now you have everything git-related set-up and you can start developing... 
-Commit with reasonable commit messages, you can squash your commits as well. Feel free to create new branches when developing and merge them to `<your-name>-develop` when you want to submit a pull request.
+Please, commit with reasonable commit messages (http://chris.beams.io/posts/git-commit/), you can squash your commits as well. Feel free to create new branches when developing and merge them to `<your-name>-develop` when you want to submit a pull request.
 
 ## How to run the project 
 **tl;dr**
