@@ -26,7 +26,7 @@ You won't be added as a contributor to this repository. You have to fork it to o
 
 ### Development
 Now you have everything git-related set-up and you can start developing... 
-Please, commit with reasonable commit messages (http://chris.beams.io/posts/git-commit/), you can squash your commits as well. Feel free to create new branches when developing and merge them to `<your-name>-develop` when you want to submit a pull request.
+Please, commit with reasonable commit messages (http://chris.beams.io/posts/git-commit/), you can squash your commits as well. Feel free to create new branches when developing (task-1, 2 etc.) and merge them to `develop` when you want to submit a pull request.
 
 ## How to run the project 
 **tl;dr**
