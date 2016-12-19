@@ -19,10 +19,10 @@ You won't be added as a contributor to this repository. You have to fork it to o
  - `git merge upstream/master` -- merge it to your own master
  - you now have the latest upstream code in your local master branch
  - `git checkout -b develop` -- creates and checkouts new branch named `develop` where you can continously work on the assignment
- - `git checkout -b features/task-1` -- crates and checkouts new branch named `features/task-1` based on develop. Commit all your progress on Task 1 to this branch. Once ready, you can merge this branch to develop using following commands
-  - `git checkout develop`
-  - `git merge features/task-1` -- now you have all the latest code in develop branch
- - You can submit `pull-request` to the original repository. Please, always submit the pull request to the branch witch starts with your name/login. (I have to create it first, so if it's not there, let me know.)
+ - `git checkout -b features/task-1` -- crates and checkouts new branch named `features/task-1` based on develop. Commit all your progress on Task 1 to this branch. Once ready, you can merge this branch to develop using following commands:
+    - `git checkout develop`
+    - `git merge features/task-1` -- now you have all the latest code in develop branch
+ - You can submit **Pull request** to the original repository. Please, always submit the pull request to the branch witch starts with your name/login. (I have to create it first, so if it's not there, let me know.)
 
 ### Development
 Now you have everything git-related set-up and you can start developing... 
