@@ -48,18 +48,22 @@ Install [ImmutableJS](http://facebook.github.io/immutable-js) to your project: `
 Refactor your application so that all the state (except for reasonable exceptions e.g. current text of input field in `CreateItem` component) is stored in top level component (e.g. `List.jsx`) and all the complex objects in state are represented as `Immutable.Map` (key values are item IDs).
 
 ## Task 3
-Install [ReduxJS](http://redux.js.org/) and [react-redux](http://redux.js.org/docs/basics/UsageWithReact.html) to your project: 
+Install [ReduxJS](http://redux.js.org/), [react-redux](http://redux.js.org/docs/basics/UsageWithReact.html) and [redux-logger](https://github.com/evgenyrodionov/redux-logger) to your project: 
 ```
 npm install --save redux
 npm install --save react-redux
+npm install --save redux-logger
 ```
 Refactor the application to use ReduxJS. 
- - Create instance of Redux store.
-  - Move all the state of top level component (`List.jsx`) to Redux store (state in Redux is described by reducers; use reducer composition).
- - Implement reducers that react to dispatched actions and change the state accordingly.
- - Wrap the App.jsx in `<Provider>` component so that all nested components can access global store (via `connect()` function).
- - Refactor `List.jsx` so that it receives the app state from Redux store as its props and passes it down to its child components. (connect + mapStateToProps)
- - Child components should dispatch actions that describe changes of the application. (connect + mapDispatchtoProps)
+ - Create **`actionTypes.js`** where you describe all possible actions (as string constants) that can modify state of the app (e.g: "ITEM_CREATED").
+ - Create **action creators** (helper functions) for all the action types you defined.
+ - Move all the state of top level component (`List.jsx`) to Redux store (state in Redux is described by reducers; use reducer composition if possible).
+  - Implement **reducers** that react to dispatched actions and change the state accordingly.
+ - In index.js:
+  - Create instance of Redux store, pass root reducer and use logging middleware.
+  - Wrap the instance of App.jsx in `<Provider>` component so that all the components can access global store (via `connect()` function).
+ - Refactor `List.jsx` so that it receives the app state from Redux store as its props and passes it down to its child components. (`connect()` + `mapStateToProps()`)
+ - Child components should dispatch actions that describe changes of the application. (`connect()` + `mapDispatchToProps()`)
   
 **IMPORTANT:** preserve Immutability!
 
