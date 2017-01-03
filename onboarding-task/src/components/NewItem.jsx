@@ -22,8 +22,8 @@ class NewItem extends React.Component {
     );
   }
 
-  handleChange(even) {
-    this.setState({currentText: even.target.value});
+  handleChange(event) {
+    this.setState({currentText: event.target.value});
   }
 
   addItem() {
