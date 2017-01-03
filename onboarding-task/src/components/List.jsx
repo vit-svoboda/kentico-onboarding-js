@@ -9,23 +9,24 @@ class List extends React.Component {
     this.state = { items: []};
   }
 
-  componentDidMount() {
-    this.addItem('tralala');
-    this.addItem('hopsasa');
-  }
-
   render() {
     return (
       <div className="row">
         <div className="row">
           <div className="col-sm-12 col-md-offset-2 col-md-8">
-            <ol className="list-group">
-              {this.state.items.map(itemToDisplay => <ListItemContainer item={itemToDisplay}
-                                                                        deleteHandler={this.deleteItem.bind(this)}
-                                                                        updateHandler={this.updateItem.bind(this)}
-                                                                        key={itemToDisplay.id} /> )}
-            </ol>
-            <NewItem addItemHandler={this.addItem.bind(this)} />
+            <table className="table table-bordered">
+              <tbody>
+                {this.state.items.map(itemToDisplay => <ListItemContainer item={itemToDisplay}
+                                                                          deleteHandler={this.deleteItem.bind(this)}
+                                                                          updateHandler={this.updateItem.bind(this)}
+                                                                          key={itemToDisplay.id} /> )}
+                <tr>
+                  <td>
+                    <NewItem addItemHandler={this.addItem.bind(this)} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

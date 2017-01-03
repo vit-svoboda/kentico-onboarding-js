@@ -23,12 +23,14 @@ class ListItemContainer extends React.Component {
                       deleteItemHandler={this.deleteItem.bind(this)} />;
 
     return (
-      <li className="list-group-item" onClick={this.openEditMode.bind(this)}>
-        <div className="form-inline">
-          <span>{this.props.item.order}.&nbsp;</span>
-          {textPlaceholder}
-        </div>
-      </li>
+      <tr onClick={this.openEditMode.bind(this)}>
+        <td>
+          <div className="form-inline">
+            <span>{this.props.item.order}.&nbsp;</span>
+            {textPlaceholder}
+          </div>
+        </td>
+      </tr>
     );
   }
 
