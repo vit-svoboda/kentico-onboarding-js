@@ -6,14 +6,16 @@ class NewItem extends React.Component {
 
     this.state = {
       currentText: ''
-    }
+    };
+
+    this.onChange = this.onChange.bind(this);
   }
 
   render() {
     return (
       <div className="form-inline">
         <div className="form-group">
-          <input type="text" className="form-control" value={this.state.currentText} onChange={this.handleChange.bind(this)} />
+          <input type="text" className="form-control" value={this.state.currentText} onChange={this.onChange} />
         </div>
         <div className="form-group">
           <button className="btn btn-default" onClick={() => this.insertItem()}>Add</button>
@@ -22,7 +24,7 @@ class NewItem extends React.Component {
     );
   }
 
-  handleChange(event) {
+  onChange(event) {
     this.setState({currentText: event.target.value});
   }
 
