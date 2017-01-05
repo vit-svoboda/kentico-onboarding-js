@@ -9,7 +9,7 @@ const EditMode = Symbol('edit');
 class ListItemContainer extends React.Component {
   static propTypes = {
     item: ImmutablePropTypes.contains({
-      text: React.PropTypes.string.isRequired,
+      text: React.PropTypes.string.isRequired
     }).isRequired,
     itemOrder: React.PropTypes.number.isRequired,
     onUpdate: React.PropTypes.func.isRequired,

@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 class ListItemEditableText extends React.Component {
   static propTypes = {
     item: ImmutablePropTypes.contains({
-      text: React.PropTypes.string.isRequired,
+      text: React.PropTypes.string.isRequired
     }).isRequired,
     onCloseEditMode: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
