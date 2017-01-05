@@ -1,6 +1,10 @@
 import React from 'react';
 
 class ListItemReadOnlyText extends React.Component {
+  static propTypes = {
+    text: React.PropTypes.string.isRequired
+  };
+
   render() {
     return (
       <div className="form-group">
@@ -9,9 +13,5 @@ class ListItemReadOnlyText extends React.Component {
     );
   }
 }
-
-ListItemReadOnlyText.propTypes = {
-  text: React.PropTypes.string.isRequired
-};
 
 export default ListItemReadOnlyText;

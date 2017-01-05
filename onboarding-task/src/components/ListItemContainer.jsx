@@ -6,6 +6,13 @@ const ReadOnlyMode = Symbol('readonly');
 const EditMode = Symbol('edit');
 
 class ListItemContainer extends React.Component {
+  static propTypes = {
+    text: React.PropTypes.string.isRequired,
+    itemOrder: React.PropTypes.number.isRequired,
+    onUpdate: React.PropTypes.func.isRequired,
+    onDelete: React.PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -47,12 +54,5 @@ class ListItemContainer extends React.Component {
     );
   }
 }
-
-ListItemContainer.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  itemOrder: React.PropTypes.number.isRequired,
-  onUpdate: React.PropTypes.func.isRequired,
-  onDelete: React.PropTypes.func.isRequired
-};
 
 export default ListItemContainer;

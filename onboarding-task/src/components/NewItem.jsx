@@ -1,6 +1,10 @@
 import React from 'react';
 
 class NewItem extends React.Component {
+  static propTypes = {
+    onInsert: React.PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -35,9 +39,5 @@ class NewItem extends React.Component {
     );
   }
 }
-
-NewItem.propTypes = {
-  onInsert: React.PropTypes.func.isRequired
-};
 
 export default NewItem;

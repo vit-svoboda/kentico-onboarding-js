@@ -1,6 +1,13 @@
 import React from 'react';
 
 class ListItemEditableText extends React.Component {
+  static propTypes = {
+    text: React.PropTypes.string.isRequired,
+    onCloseEditMode: React.PropTypes.func.isRequired,
+    onDelete: React.PropTypes.func.isRequired,
+    onUpdate: React.PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -32,12 +39,5 @@ class ListItemEditableText extends React.Component {
     );
   }
 }
-
-ListItemEditableText.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  onCloseEditMode: React.PropTypes.func.isRequired,
-  onDelete: React.PropTypes.func.isRequired,
-  onUpdate: React.PropTypes.func.isRequired
-};
 
 export default ListItemEditableText;
