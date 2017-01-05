@@ -9,6 +9,7 @@ class NewItem extends React.Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.insertItem = this.insertItem.bind(this);
   }
 
   render() {
@@ -18,7 +19,7 @@ class NewItem extends React.Component {
           <input type="text" className="form-control" value={this.state.currentText} onChange={this.onChange} />
         </div>
         <div className="form-group">
-          <button className="btn btn-default" onClick={() => this.insertItem()}>Add</button>
+          <button className="btn btn-default" onClick={this.insertItem}>Add</button>
         </div>
       </div>
     );
