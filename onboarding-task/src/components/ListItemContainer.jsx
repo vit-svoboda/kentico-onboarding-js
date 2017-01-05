@@ -7,7 +7,9 @@ const EditMode = Symbol('edit');
 
 class ListItemContainer extends React.Component {
   static propTypes = {
-    text: React.PropTypes.string.isRequired,
+    item: React.PropTypes.shape({
+      text: React.PropTypes.string.isRequired
+    }).isRequired,
     itemOrder: React.PropTypes.number.isRequired,
     onUpdate: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired
@@ -36,8 +38,8 @@ class ListItemContainer extends React.Component {
 
   render() {
     const textPlaceholder = this.state.renderMode === ReadOnlyMode
-      ? <ReadOnlyText text={this.props.text}/>
-      : <EditableText text={this.props.text}
+      ? <ReadOnlyText item={this.props.item}/>
+      : <EditableText item={this.props.item}
                       onCloseEditMode={this._closeEditMode}
                       onUpdate={this.props.onUpdate}
                       onDelete={this.props.onDelete}/>;

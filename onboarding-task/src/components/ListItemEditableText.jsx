@@ -2,7 +2,9 @@ import React from 'react';
 
 class ListItemEditableText extends React.Component {
   static propTypes = {
-    text: React.PropTypes.string.isRequired,
+    item: React.PropTypes.shape({
+      text: React.PropTypes.string.isRequired
+    }).isRequired,
     onCloseEditMode: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onUpdate: React.PropTypes.func.isRequired
@@ -12,7 +14,7 @@ class ListItemEditableText extends React.Component {
     super(props);
 
     this.state = {
-      currentText: props.text
+      currentText: props.item.text
     };
 
     this._confirmChange = this._confirmChange.bind(this);

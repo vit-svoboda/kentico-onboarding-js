@@ -48,7 +48,7 @@ class List extends React.Component {
     const items = this
       .state
       .items
-      .map((itemToDisplay, index) => <ListItemContainer text={itemToDisplay.text}
+      .map((itemToDisplay, index) => <ListItemContainer item={itemToDisplay}
                                                         itemOrder={index + 1}
                                                         onDelete={() => this._deleteItem(itemToDisplay)}
                                                         onUpdate={this._getItemUpdater(itemToDisplay)}
