@@ -7,13 +7,15 @@ class ListItemEditableText extends React.Component {
     this.state = {
       currentText: props.item.text
     };
+
+    this.confirmChange = this.confirmChange.bind(this);
   }
 
   render() {
     return (
       <div className="form-group">
         <input type="text" className="form-control" value={this.state.currentText} onChange={this.handleChange.bind(this)} />
-        <button className="btn btn-primary" onClick={this.confirmChange.bind(this)}>Save</button>
+        <button className="btn btn-primary" onClick={this.confirmChange}>Save</button>
         <button className="btn btn-default" onClick={this.props.closeEditModeHandler}>Cancel</button>
         <button className="btn btn-danger" onClick={this.props.onDelete}>Delete</button>
       </div>
@@ -25,7 +27,7 @@ class ListItemEditableText extends React.Component {
   }
 
   confirmChange() {
-    this.props.confirmChangesHandler(this.state.currentText);
+    this.props.onUpdate(this.state.currentText);
     this.props.closeEditModeHandler();
   }
 }

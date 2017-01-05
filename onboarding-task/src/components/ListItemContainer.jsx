@@ -19,7 +19,7 @@ class ListItemContainer extends React.Component {
       ? <ReadOnlyText item={this.props.item} />
       : <EditableText item={this.props.item}
                       closeEditModeHandler={this.closeEditModeHandler.bind(this)}
-                      confirmChangesHandler={this.updateItem.bind(this)}
+                      onUpdate={this.props.onUpdate}
                       onDelete={this.props.onDelete} />;
 
     return (
@@ -42,11 +42,6 @@ class ListItemContainer extends React.Component {
 
   closeEditModeHandler() {
     this.setState({ renderMode: ReadOnlyMode});
-  }
-
-
-  updateItem(newText) {
-    this.props.updateHandler(this.props.item, newText);
   }
 }
 

@@ -20,7 +20,7 @@ class List extends React.Component {
                 {this.state.items.map((itemToDisplay, index) => <ListItemContainer item={itemToDisplay}
                                                                                    itemOrder={index + 1}
                                                                                    onDelete={() => this.deleteItem(itemToDisplay)}
-                                                                                   updateHandler={this.updateItem.bind(this)}
+                                                                                   onUpdate={this.getItemUpdater(itemToDisplay)}
                                                                                    key={itemToDisplay.id} /> )}
                 <tr>
                   <td>
@@ -35,16 +35,18 @@ class List extends React.Component {
     );
   }
 
-  updateItem(itemToUpdate, newText) {
-    const updatedItems = this.state.items.map(currentItem => {
-      if(currentItem.id === itemToUpdate.id) {
-        currentItem.text = newText;
-      }
+  getItemUpdater(itemToUpdate) {
+    return (newText) => {
+      const updatedItems = this.state.items.map(currentItem => {
+        if(currentItem.id === itemToUpdate.id) {
+          currentItem.text = newText;
+        }
 
-      return currentItem;
-    });
+        return currentItem;
+      });
 
-    this.setState({ items: updatedItems });
+      this.setState({ items: updatedItems });
+    }
   }
 
   deleteItem(itemToDelete) {
