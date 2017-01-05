@@ -8,31 +8,31 @@ class NewItem extends React.Component {
       currentText: ''
     };
 
-    this.onChange = this.onChange.bind(this);
-    this.insertItem = this.insertItem.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this._insertItem = this._insertItem.bind(this);
+  }
+
+  _onChange(event) {
+    this.setState({currentText: event.target.value});
+  }
+
+  _insertItem() {
+    const text = this.state.currentText;
+    this.setState({currentText: ''});
+    this.props.onInsert(text);
   }
 
   render() {
     return (
       <div className="form-inline">
         <div className="form-group">
-          <input type="text" className="form-control" value={this.state.currentText} onChange={this.onChange} />
+          <input type="text" className="form-control" value={this.state.currentText} onChange={this._onChange} />
         </div>
         <div className="form-group">
-          <button className="btn btn-default" onClick={this.insertItem}>Add</button>
+          <button className="btn btn-default" onClick={this._insertItem}>Add</button>
         </div>
       </div>
     );
-  }
-
-  onChange(event) {
-    this.setState({currentText: event.target.value});
-  }
-
-  insertItem() {
-    const text = this.state.currentText;
-    this.setState({currentText: ''});
-    this.props.onInsert(text);
   }
 }
 

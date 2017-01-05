@@ -10,32 +10,7 @@ class List extends React.Component {
     this.state = { items: []};
   }
 
-  render() {
-    return (
-      <div className="row">
-        <div className="row">
-          <div className="col-sm-12 col-md-offset-2 col-md-8">
-            <table className="table table-bordered">
-              <tbody>
-                {this.state.items.map((itemToDisplay, index) => <ListItemContainer text={itemToDisplay.text}
-                                                                                   itemOrder={index + 1}
-                                                                                   onDelete={() => this.deleteItem(itemToDisplay)}
-                                                                                   onUpdate={this.getItemUpdater(itemToDisplay)}
-                                                                                   key={itemToDisplay.id} /> )}
-                <tr>
-                  <td>
-                    <NewItem onInsert={(itemText) => this.insertItem(itemText)} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  getItemUpdater(itemToUpdate) {
+  _getItemUpdater(itemToUpdate) {
     return (newText) => {
       const updatedItems = this.state.items.map(currentItem => {
         if(currentItem.id === itemToUpdate.id) {
@@ -49,7 +24,7 @@ class List extends React.Component {
     }
   }
 
-  deleteItem(itemToDelete) {
+  _deleteItem(itemToDelete) {
     const preservedItems = this
       .state
       .items
@@ -58,7 +33,7 @@ class List extends React.Component {
     this.setState({ items: preservedItems });
   }
 
-  insertItem(itemText) {
+  _insertItem(itemText) {
     const allItems = this.state.items;
 
     allItems.push({
@@ -67,6 +42,31 @@ class List extends React.Component {
     });
 
     this.setState({items: allItems });
+  }
+
+  render() {
+    return (
+      <div className="row">
+        <div className="row">
+          <div className="col-sm-12 col-md-offset-2 col-md-8">
+            <table className="table table-bordered">
+              <tbody>
+                {this.state.items.map((itemToDisplay, index) => <ListItemContainer text={itemToDisplay.text}
+                                                                                   itemOrder={index + 1}
+                                                                                   onDelete={() => this._deleteItem(itemToDisplay)}
+                                                                                   onUpdate={this._getItemUpdater(itemToDisplay)}
+                                                                                   key={itemToDisplay.id} /> )}
+                <tr>
+                  <td>
+                    <NewItem onInsert={(itemText) => this._insertItem(itemText)} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

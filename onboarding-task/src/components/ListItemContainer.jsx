@@ -13,20 +13,30 @@ class ListItemContainer extends React.Component {
       renderMode: ReadOnlyMode
     };
 
-    this.openEditMode = this.openEditMode.bind(this);
-    this.closeEditMode = this.closeEditMode.bind(this);
+    this._openEditMode = this._openEditMode.bind(this);
+    this._closeEditMode = this._closeEditMode.bind(this);
+  }
+
+  _openEditMode() {
+    if (this.state.renderMode !== EditMode) {
+      this.setState({ renderMode: EditMode});
+    }
+  }
+
+  _closeEditMode() {
+    this.setState({ renderMode: ReadOnlyMode});
   }
 
   render() {
     const textPlaceholder = this.state.renderMode === ReadOnlyMode
       ? <ReadOnlyText text={this.props.text} />
       : <EditableText text={this.props.text}
-                      onCloseEditMode={this.closeEditMode}
+                      onCloseEditMode={this._closeEditMode}
                       onUpdate={this.props.onUpdate}
                       onDelete={this.props.onDelete} />;
 
     return (
-      <tr onClick={this.openEditMode}>
+      <tr onClick={this._openEditMode}>
         <td>
           <div className="form-inline">
             <span>{this.props.itemOrder}.&nbsp;</span>
@@ -35,16 +45,6 @@ class ListItemContainer extends React.Component {
         </td>
       </tr>
     );
-  }
-
-  openEditMode() {
-    if (this.state.renderMode !== EditMode) {
-      this.setState({ renderMode: EditMode});
-    }
-  }
-
-  closeEditMode() {
-    this.setState({ renderMode: ReadOnlyMode});
   }
 }
 
