@@ -24,7 +24,7 @@ class List extends React.Component {
                                                                                    key={itemToDisplay.id} /> )}
                 <tr>
                   <td>
-                    <NewItem addItemHandler={this.addItem.bind(this)} />
+                    <NewItem onInsert={(itemText) => this.insertItem(itemText)} />
                   </td>
                 </tr>
               </tbody>
@@ -58,7 +58,7 @@ class List extends React.Component {
     this.setState({ items: preservedItems });
   }
 
-  addItem(itemText) {
+  insertItem(itemText) {
     const allItems = this.state.items;
 
     allItems.push({

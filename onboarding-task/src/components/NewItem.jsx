@@ -16,7 +16,7 @@ class NewItem extends React.Component {
           <input type="text" className="form-control" value={this.state.currentText} onChange={this.handleChange.bind(this)} />
         </div>
         <div className="form-group">
-          <button className="btn btn-default" onClick={this.addItem.bind(this)}>Add</button>
+          <button className="btn btn-default" onClick={() => this.insertItem()}>Add</button>
         </div>
       </div>
     );
@@ -26,10 +26,10 @@ class NewItem extends React.Component {
     this.setState({currentText: event.target.value});
   }
 
-  addItem() {
+  insertItem() {
     const text = this.state.currentText;
     this.setState({currentText: ''});
-    this.props.addItemHandler(text);
+    this.props.onInsert(text);
   }
 }
 
