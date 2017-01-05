@@ -11,19 +11,22 @@ class ListItemContainer extends React.Component {
 
     this.state = {
       renderMode: ReadOnlyMode
-    }
+    };
+
+    this.openEditMode = this.openEditMode.bind(this);
+    this.closeEditMode = this.closeEditMode.bind(this);
   }
 
   render() {
     const textPlaceholder = this.state.renderMode === ReadOnlyMode
       ? <ReadOnlyText item={this.props.item} />
       : <EditableText item={this.props.item}
-                      closeEditModeHandler={this.closeEditModeHandler.bind(this)}
+                      onCloseEditMode={this.closeEditMode}
                       onUpdate={this.props.onUpdate}
                       onDelete={this.props.onDelete} />;
 
     return (
-      <tr onClick={this.openEditMode.bind(this)}>
+      <tr onClick={this.openEditMode}>
         <td>
           <div className="form-inline">
             <span>{this.props.itemOrder}.&nbsp;</span>
@@ -40,7 +43,7 @@ class ListItemContainer extends React.Component {
     }
   }
 
-  closeEditModeHandler() {
+  closeEditMode() {
     this.setState({ renderMode: ReadOnlyMode});
   }
 }
