@@ -1,4 +1,5 @@
 import React from 'react';
+import { createGuid } from '../utils/guidGenerator'
 import ListItemContainer from './ListItemContainer';
 import NewItem from './NewItem'
 
@@ -60,19 +61,10 @@ class List extends React.Component {
 
     allItems.push({
       text: itemText,
-      id: this.createGuid()
+      id: createGuid()
     });
 
     this.setState({items: allItems });
-  }
-
-  createGuid() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
 }
 
