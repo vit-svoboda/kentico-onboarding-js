@@ -17,7 +17,7 @@ class List extends React.Component {
           <div className="col-sm-12 col-md-offset-2 col-md-8">
             <table className="table table-bordered">
               <tbody>
-                {this.state.items.map((itemToDisplay, index) => <ListItemContainer item={itemToDisplay}
+                {this.state.items.map((itemToDisplay, index) => <ListItemContainer text={itemToDisplay.text}
                                                                                    itemOrder={index + 1}
                                                                                    onDelete={() => this.deleteItem(itemToDisplay)}
                                                                                    onUpdate={this.getItemUpdater(itemToDisplay)}

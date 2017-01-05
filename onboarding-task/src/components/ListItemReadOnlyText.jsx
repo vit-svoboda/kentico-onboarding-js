@@ -4,7 +4,7 @@ class ListItemReadOnlyText extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <span>{this.props.item.text}</span>
+        <span>{this.props.text}</span>
       </div>
     );
   }

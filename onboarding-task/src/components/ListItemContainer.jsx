@@ -19,8 +19,8 @@ class ListItemContainer extends React.Component {
 
   render() {
     const textPlaceholder = this.state.renderMode === ReadOnlyMode
-      ? <ReadOnlyText item={this.props.item} />
-      : <EditableText item={this.props.item}
+      ? <ReadOnlyText text={this.props.text} />
+      : <EditableText text={this.props.text}
                       onCloseEditMode={this.closeEditMode}
                       onUpdate={this.props.onUpdate}
                       onDelete={this.props.onDelete} />;

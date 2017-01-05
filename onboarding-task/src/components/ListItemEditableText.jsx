@@ -5,7 +5,7 @@ class ListItemEditableText extends React.Component {
     super(props);
 
     this.state = {
-      currentText: props.item.text
+      currentText: props.text
     };
 
     this.confirmChange = this.confirmChange.bind(this);
