@@ -24,7 +24,7 @@ class ListItemEditableText extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <input type="text" className="form-control" value={this.state.currentText} onChange={this._onChange} />
+        <input type="text" className="form-control" value={this.state.currentText} onChange={this._onChange}/>
         <button className="btn btn-primary" onClick={this._confirmChange}>Save</button>
         <button className="btn btn-default" onClick={this.props.onCloseEditMode}>Cancel</button>
         <button className="btn btn-danger" onClick={this.props.onDelete}>Delete</button>

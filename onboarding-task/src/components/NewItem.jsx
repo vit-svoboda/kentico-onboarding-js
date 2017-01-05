@@ -26,7 +26,7 @@ class NewItem extends React.Component {
     return (
       <div className="form-inline">
         <div className="form-group">
-          <input type="text" className="form-control" value={this.state.currentText} onChange={this._onChange} />
+          <input type="text" className="form-control" value={this.state.currentText} onChange={this._onChange}/>
         </div>
         <div className="form-group">
           <button className="btn btn-default" onClick={this._insertItem}>Add</button>
