@@ -16,10 +16,11 @@ class List extends React.Component {
           <div className="col-sm-12 col-md-offset-2 col-md-8">
             <table className="table table-bordered">
               <tbody>
-                {this.state.items.map(itemToDisplay => <ListItemContainer item={itemToDisplay}
-                                                                          deleteHandler={this.deleteItem.bind(this)}
-                                                                          updateHandler={this.updateItem.bind(this)}
-                                                                          key={itemToDisplay.id} /> )}
+                {this.state.items.map((itemToDisplay, index) => <ListItemContainer item={itemToDisplay}
+                                                                                   itemOrder={index + 1}
+                                                                                   deleteHandler={this.deleteItem.bind(this)}
+                                                                                   updateHandler={this.updateItem.bind(this)}
+                                                                                   key={itemToDisplay.id} /> )}
                 <tr>
                   <td>
                     <NewItem addItemHandler={this.addItem.bind(this)} />
@@ -46,12 +47,10 @@ class List extends React.Component {
   }
 
   deleteItem(itemToDelete) {
-    let itemOrder = 1;
     const preservedItems = this
       .state
       .items
-      .filter(currentItem => currentItem.id !== itemToDelete.id)
-      .map(currentItem => ({ text: currentItem.text, order: itemOrder++, id: currentItem.id }));
+      .filter(currentItem => currentItem.id !== itemToDelete.id);
 
     this.setState({ items: preservedItems });
   }
@@ -61,7 +60,6 @@ class List extends React.Component {
 
     allItems.push({
       text: itemText,
-      order: allItems.length + 1,
       id: this.createGuid()
     });
 

@@ -26,7 +26,7 @@ class ListItemContainer extends React.Component {
       <tr onClick={this.openEditMode.bind(this)}>
         <td>
           <div className="form-inline">
-            <span>{this.props.item.order}.&nbsp;</span>
+            <span>{this.props.itemOrder}.&nbsp;</span>
             {textPlaceholder}
           </div>
         </td>
