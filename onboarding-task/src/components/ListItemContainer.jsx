@@ -48,4 +48,11 @@ class ListItemContainer extends React.Component {
   }
 }
 
+ListItemContainer.propTypes = {
+  text: React.PropTypes.string.isRequired,
+  itemOrder: React.PropTypes.number.isRequired,
+  onUpdate: React.PropTypes.func.isRequired,
+  onDelete: React.PropTypes.func.isRequired
+};
+
 export default ListItemContainer;

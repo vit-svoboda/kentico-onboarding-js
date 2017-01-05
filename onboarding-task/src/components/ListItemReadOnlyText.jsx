@@ -10,4 +10,8 @@ class ListItemReadOnlyText extends React.Component {
   }
 }
 
+ListItemReadOnlyText.propTypes = {
+  text: React.PropTypes.string.isRequired
+};
+
 export default ListItemReadOnlyText;

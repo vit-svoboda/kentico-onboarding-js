@@ -33,4 +33,11 @@ class ListItemEditableText extends React.Component {
   }
 }
 
+ListItemEditableText.propTypes = {
+  text: React.PropTypes.string.isRequired,
+  onCloseEditMode: React.PropTypes.func.isRequired,
+  onDelete: React.PropTypes.func.isRequired,
+  onUpdate: React.PropTypes.func.isRequired
+};
+
 export default ListItemEditableText;

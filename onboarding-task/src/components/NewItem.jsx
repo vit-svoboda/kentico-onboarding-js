@@ -36,4 +36,8 @@ class NewItem extends React.Component {
   }
 }
 
+NewItem.propTypes = {
+  onInsert: React.PropTypes.func.isRequired
+};
+
 export default NewItem;
