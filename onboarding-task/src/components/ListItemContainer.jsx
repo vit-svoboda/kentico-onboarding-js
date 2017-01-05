@@ -20,7 +20,7 @@ class ListItemContainer extends React.Component {
       : <EditableText item={this.props.item}
                       closeEditModeHandler={this.closeEditModeHandler.bind(this)}
                       confirmChangesHandler={this.updateItem.bind(this)}
-                      deleteItemHandler={this.deleteItem.bind(this)} />;
+                      onDelete={this.props.onDelete} />;
 
     return (
       <tr onClick={this.openEditMode.bind(this)}>
@@ -47,10 +47,6 @@ class ListItemContainer extends React.Component {
 
   updateItem(newText) {
     this.props.updateHandler(this.props.item, newText);
-  }
-
-  deleteItem() {
-    this.props.deleteHandler(this.props.item);
   }
 }
 

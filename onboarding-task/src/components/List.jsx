@@ -19,7 +19,7 @@ class List extends React.Component {
               <tbody>
                 {this.state.items.map((itemToDisplay, index) => <ListItemContainer item={itemToDisplay}
                                                                                    itemOrder={index + 1}
-                                                                                   deleteHandler={this.deleteItem.bind(this)}
+                                                                                   onDelete={() => this.deleteItem(itemToDisplay)}
                                                                                    updateHandler={this.updateItem.bind(this)}
                                                                                    key={itemToDisplay.id} /> )}
                 <tr>
