@@ -1,14 +1,15 @@
 import React from 'react';
-import ReadOnlyText from './ListItemReadOnlyText'
-import EditableText from './ListItemEditableText'
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import ReadOnlyText from './ListItemReadOnlyText';
+import EditableText from './ListItemEditableText';
 
 const ReadOnlyMode = Symbol('readonly');
 const EditMode = Symbol('edit');
 
 class ListItemContainer extends React.Component {
   static propTypes = {
-    item: React.PropTypes.shape({
-      text: React.PropTypes.string.isRequired
+    item: ImmutablePropTypes.contains({
+      text: React.PropTypes.string.isRequired,
     }).isRequired,
     itemOrder: React.PropTypes.number.isRequired,
     onUpdate: React.PropTypes.func.isRequired,

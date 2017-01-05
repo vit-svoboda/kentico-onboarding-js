@@ -1,9 +1,10 @@
 import React from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 class ListItemEditableText extends React.Component {
   static propTypes = {
-    item: React.PropTypes.shape({
-      text: React.PropTypes.string.isRequired
+    item: ImmutablePropTypes.contains({
+      text: React.PropTypes.string.isRequired,
     }).isRequired,
     onCloseEditMode: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
@@ -14,7 +15,7 @@ class ListItemEditableText extends React.Component {
     super(props);
 
     this.state = {
-      currentText: props.item.text
+      currentText: props.item.get('text')
     };
 
     this._confirmChange = this._confirmChange.bind(this);
