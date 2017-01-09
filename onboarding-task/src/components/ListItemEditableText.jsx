@@ -1,46 +1,50 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import deleteItem from '../actions/deleteItem';
+import updateItem from '../actions/updateItem';
+import checkItemIn from '../actions/checkItemIn';
+import revertItem from '../actions/revertItem';
+import {TEXT} from '../descriptors/itemProperties';
 
 class ListItemEditableText extends React.Component {
   static propTypes = {
     item: ImmutablePropTypes.contains({
-      text: React.PropTypes.string.isRequired
-    }).isRequired,
-    onCloseEditMode: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-    onUpdate: React.PropTypes.func.isRequired
+      [TEXT]: React.PropTypes.string.isRequired
+    }).isRequired
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentText: props.item.get('text')
-    };
-
-    this._confirmChange = this._confirmChange.bind(this);
-    this._onChange = this._onChange.bind(this);
-  }
-
-  _onChange(event) {
-    this.setState({currentText: event.target.value});
-  }
-
-  _confirmChange() {
-    this.props.onUpdate(this.state.currentText);
-    this.props.onCloseEditMode();
-  }
 
   render() {
     return (
       <div className="form-group">
-        <input type="text" className="form-control" value={this.state.currentText} onChange={this._onChange}/>
-        <button className="btn btn-primary" onClick={this._confirmChange}>Save</button>
-        <button className="btn btn-default" onClick={this.props.onCloseEditMode}>Cancel</button>
-        <button className="btn btn-danger" onClick={this.props.onDelete}>Delete</button>
+        <input type="text" className="form-control" value={this.props.item.get(TEXT)} onChange={this.props.updateText}/>
+        <button className="btn btn-primary" onClick={this.props.confirmChanges}>Save</button>
+        <button className="btn btn-default" onClick={this.props.revertChanges}>Cancel</button>
+        <button className="btn btn-danger" onClick={this.props.deleteItem}>Delete</button>
       </div>
     );
   }
 }
 
-export default ListItemEditableText;
+const mapStateToProps = (dispatch, ownProps) => {
+  return {
+    updateText: event => {
+      const action = updateItem(ownProps.item, event.target.value);
+      dispatch(action);
+    },
+    confirmChanges: text => {
+      const action = checkItemIn(ownProps.item);
+      dispatch(action);
+    },
+    revertChanges: () => {
+      const action = revertItem(ownProps.item);
+      dispatch(action);
+    },
+    deleteItem: () => {
+      const action = deleteItem(ownProps.item);
+      dispatch(action);
+    }
+  }
+};
+
+export default connect(null, mapStateToProps)(ListItemEditableText);

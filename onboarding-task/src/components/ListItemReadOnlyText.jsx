@@ -1,17 +1,18 @@
 import React from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes'
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import {TEXT} from '../descriptors/itemProperties';
 
 class ListItemReadOnlyText extends React.Component {
   static propTypes = {
     item: ImmutablePropTypes.contains({
-      text: React.PropTypes.string.isRequired
+      [TEXT]: React.PropTypes.string.isRequired
     }).isRequired
   };
 
   render() {
     return (
       <div className="form-group">
-        <span>{this.props.item.get('text')}</span>
+        <span>{this.props.item.get(TEXT)}</span>
       </div>
     );
   }
