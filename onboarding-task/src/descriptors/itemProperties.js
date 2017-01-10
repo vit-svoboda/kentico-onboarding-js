@@ -1,6 +1,8 @@
-const ID = 'id';
-const TEXT = 'text';
-const IS_CHECKED_OUT = 'isCheckedOut';
-const ORIGINAL_TEXT = 'originalText';
+class itemProperties {
+  static ID = 'id';
+  static TEXT = 'text';
+  static IS_CHECKED_OUT = 'isCheckedOut';
+  static ORIGINAL_TEXT = 'originalText';
+}
 
-export {ID, TEXT, IS_CHECKED_OUT, ORIGINAL_TEXT};
+export default itemProperties;

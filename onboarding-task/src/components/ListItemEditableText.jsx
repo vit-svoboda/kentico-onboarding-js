@@ -5,12 +5,12 @@ import deleteItem from '../actions/deleteItem';
 import updateItem from '../actions/updateItem';
 import checkItemIn from '../actions/checkItemIn';
 import revertItem from '../actions/revertItem';
-import {TEXT} from '../descriptors/itemProperties';
+import itemProperties from '../descriptors/itemProperties';
 
 class ListItemEditableText extends React.Component {
   static propTypes = {
     item: ImmutablePropTypes.contains({
-      [TEXT]: React.PropTypes.string.isRequired
+      [itemProperties.TEXT]: React.PropTypes.string.isRequired
     }).isRequired,
     updateText: React.PropTypes.func.isRequired,
     confirmChanges: React.PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ class ListItemEditableText extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <input type="text" className="form-control" value={this.props.item.get(TEXT)} onChange={this.props.updateText}/>
+        <input type="text" className="form-control" value={this.props.item.get(itemProperties.TEXT)} onChange={this.props.updateText}/>
         <button className="btn btn-primary" onClick={this.props.confirmChanges}>Save</button>
         <button className="btn btn-default" onClick={this.props.revertChanges}>Cancel</button>
         <button className="btn btn-danger" onClick={this.props.deleteItem}>Delete</button>

@@ -1,1 +1,5 @@
-export const TEXT = 'text';
+class insertFormProperties {
+  static TEXT = 'text';
+}
+
+export default insertFormProperties;

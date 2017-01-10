@@ -1,18 +1,18 @@
 import Immutable from 'immutable';
 import actionTypes from '../actions/actionTypes';
 import createGuid from '../utils/guidGenerator';
-import {ID, TEXT, IS_CHECKED_OUT, ORIGINAL_TEXT} from '../descriptors/itemProperties';
+import itemProperties from '../descriptors/itemProperties';
 
 const insertItem = (state, itemText) => {
   const newItem = Immutable.Map({
-    [TEXT]: itemText,
-    [ID]: createGuid(),
-    [IS_CHECKED_OUT]: false,
-    [ORIGINAL_TEXT]: itemText
+    [itemProperties.TEXT]: itemText,
+    [itemProperties.ID]: createGuid(),
+    [itemProperties.IS_CHECKED_OUT]: false,
+    [itemProperties.ORIGINAL_TEXT]: itemText
   });
 
   const allItems = state
-    .set(newItem.get(ID), newItem);
+    .set(newItem.get(itemProperties.ID), newItem);
 
   return allItems;
 };
@@ -28,54 +28,54 @@ const deleteItem = (state, itemId) => {
 
 const checkoutItem = (state, itemId) => {
   const itemToCheckout = state.get(itemId);
-  if (itemToCheckout.get(IS_CHECKED_OUT)) {
+  if (itemToCheckout.get(itemProperties.IS_CHECKED_OUT)) {
     return state;
   }
 
   const updatedItems = state
     .update(itemId, item => item
-      .set(IS_CHECKED_OUT, true)
-      .set(ORIGINAL_TEXT, item.get(TEXT)));
+      .set(itemProperties.IS_CHECKED_OUT, true)
+      .set(itemProperties.ORIGINAL_TEXT, item.get(itemProperties.TEXT)));
 
   return updatedItems;
 };
 
 const revertItem = (state, itemId) => {
   const itemToRevert = state.get(itemId);
-  if (!itemToRevert.get(IS_CHECKED_OUT)) {
+  if (!itemToRevert.get(itemProperties.IS_CHECKED_OUT)) {
     return state;
   }
 
   const updatedItems = state
     .update(itemId, item => item
-      .set(IS_CHECKED_OUT, false)
-      .set(TEXT, item.get(ORIGINAL_TEXT)));
+      .set(itemProperties.IS_CHECKED_OUT, false)
+      .set(itemProperties.TEXT, item.get(itemProperties.ORIGINAL_TEXT)));
 
   return updatedItems;
 };
 
 const checkinItem = (state, itemId) => {
   const itemToCheckin = state.get(itemId);
-  if (!itemToCheckin.get(IS_CHECKED_OUT)) {
+  if (!itemToCheckin.get(itemProperties.IS_CHECKED_OUT)) {
     return state;
   }
 
   const updatedItems = state
     .update(itemId, item => item
-      .set(IS_CHECKED_OUT, false)
-      .set(ORIGINAL_TEXT, item.get(TEXT)));
+      .set(itemProperties.IS_CHECKED_OUT, false)
+      .set(itemProperties.ORIGINAL_TEXT, item.get(itemProperties.TEXT)));
 
   return updatedItems;
 };
 
 const updateItem = (state, itemId, newText) => {
   const itemToUpdate = state.get(itemId);
-  if (!itemToUpdate.get(IS_CHECKED_OUT)) {
+  if (!itemToUpdate.get(itemProperties.IS_CHECKED_OUT)) {
     throw new Error('Cannot update checked in item.');
   }
 
   const updatedItems = state
-    .update(itemId, item => item.set(TEXT, newText));
+    .update(itemId, item => item.set(itemProperties.TEXT, newText));
 
   return updatedItems;
 };

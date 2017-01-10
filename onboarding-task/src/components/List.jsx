@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ListItemContainer from './ListItemContainer';
 import NewItem from './NewItem';
-import {ID as ITEM_ID} from '../descriptors/itemProperties';
-import {TEXT as FORM_TEXT} from '../descriptors/insertFormProperties';
+import itemProperties from '../descriptors/itemProperties';
+import insertFormProperties from '../descriptors/insertFormProperties';
 
 class List extends React.Component {
   static propTypes = {
     items: ImmutablePropTypes.map.isRequired,
     insertForm: ImmutablePropTypes.contains({
-      [FORM_TEXT]: React.PropTypes.string.isRequired
+      [insertFormProperties.TEXT]: React.PropTypes.string.isRequired
     }).isRequired
   };
 
@@ -22,7 +22,7 @@ class List extends React.Component {
       .map((itemToDisplay, index) => {
         return <ListItemContainer item={itemToDisplay}
                                   itemOrder={index + 1}
-                                  key={itemToDisplay.get(ITEM_ID)}/>;
+                                  key={itemToDisplay.get(itemProperties.ID)}/>;
       });
 
     return (
@@ -35,7 +35,7 @@ class List extends React.Component {
 
                 <tr>
                   <td>
-                    <NewItem text={this.props.insertForm.get(FORM_TEXT)}/>
+                    <NewItem text={this.props.insertForm.get(insertFormProperties.TEXT)}/>
                   </td>
                 </tr>
               </tbody>
