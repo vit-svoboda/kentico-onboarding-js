@@ -1,20 +1,12 @@
 import Immutable from 'immutable';
 import actionTypes from '../actions/actionTypes';
-import createGuid from '../utils/guidGenerator';
 import itemProperties from '../descriptors/itemProperties';
 
-const insertItem = (state, itemText) => {
-  const newItem = Immutable.Map({
-    [itemProperties.TEXT]: itemText,
-    [itemProperties.ID]: createGuid(),
-    [itemProperties.IS_CHECKED_OUT]: false,
-    [itemProperties.ORIGINAL_TEXT]: itemText
-  });
+const insertItem = (state, item) => {
+  const itemId = item.get(itemProperties.ID);
 
-  const allItems = state
-    .set(newItem.get(itemProperties.ID), newItem);
-
-  return allItems;
+  return state
+    .set(itemId, item);
 };
 
 const deleteItem = (state, itemId) => {
@@ -83,7 +75,7 @@ const updateItem = (state, itemId, newText) => {
 const itemActionsReducer = (previousStoreState = Immutable.Map(), action) => {
   switch (action.type) {
     case actionTypes.ITEM_INSERT: {
-      return insertItem(previousStoreState, action.payload.text);
+      return insertItem(previousStoreState, action.payload.item);
     }
     case actionTypes.ITEM_CHECKOUT: {
       return checkoutItem(previousStoreState, action.payload.id);
