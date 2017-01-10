@@ -5,7 +5,9 @@ import updateNewItem from '../actions/updateNewItem';
 
 class NewItem extends React.Component {
   static propTypes = {
-    text: React.PropTypes.string.isRequired
+    text: React.PropTypes.string.isRequired,
+    updateText: React.PropTypes.func.isRequired,
+    insertItem: React.PropTypes.func.isRequired
   };
 
   render() {

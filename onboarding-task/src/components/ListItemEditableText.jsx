@@ -11,7 +11,11 @@ class ListItemEditableText extends React.Component {
   static propTypes = {
     item: ImmutablePropTypes.contains({
       [TEXT]: React.PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    updateText: React.PropTypes.func.isRequired,
+    confirmChanges: React.PropTypes.func.isRequired,
+    revertChanges: React.PropTypes.func.isRequired,
+    deleteItem: React.PropTypes.func.isRequired
   };
 
   render() {

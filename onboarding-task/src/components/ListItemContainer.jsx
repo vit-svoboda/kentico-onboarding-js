@@ -12,7 +12,8 @@ class ListItemContainer extends React.Component {
       [TEXT]: React.PropTypes.string.isRequired,
       [IS_CHECKED_OUT]: React.PropTypes.bool.isRequired
     }).isRequired,
-    itemOrder: React.PropTypes.number.isRequired
+    itemOrder: React.PropTypes.number.isRequired,
+    checkOut: React.PropTypes.func.isRequired
   };
 
   render() {
@@ -21,7 +22,7 @@ class ListItemContainer extends React.Component {
       : <EditableText item={this.props.item}/>;
 
     return (
-      <tr onClick={this.props.checkout}>
+      <tr onClick={this.props.checkOut}>
         <td>
           <div className="form-inline">
             <span>{this.props.itemOrder}.&nbsp;</span>
@@ -35,7 +36,7 @@ class ListItemContainer extends React.Component {
 
 const mapStateToProps = (dispatch, ownProps) => {
   return {
-    checkout: () => {
+    checkOut: () => {
       if (!ownProps.item.get(IS_CHECKED_OUT)) {
         const action = checkItemOut(ownProps.item);
         dispatch(action);
