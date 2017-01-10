@@ -68,8 +68,9 @@ const handleSingleItemAction = (state, action) => {
     case actionTypes.ITEM_CHECKIN: {
       return checkItemIn(state);
     }
-    case actionTypes.ITEM_UPDATE:
+    case actionTypes.ITEM_UPDATE: {
       return updateItem(state, action.payload.newText);
+    }
     default: {
       return state;
     }
