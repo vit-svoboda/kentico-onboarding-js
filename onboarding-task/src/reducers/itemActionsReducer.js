@@ -18,58 +18,62 @@ const deleteItem = (state, itemId) => {
   return preservedItems;
 };
 
-const checkoutItem = (state, itemId) => {
-  const itemToCheckout = state.get(itemId);
-  if (itemToCheckout.get(itemProperties.IS_CHECKED_OUT)) {
-    return state;
+const checkItemOut = itemToCheckOut => {
+  if (itemToCheckOut.get(itemProperties.IS_CHECKED_OUT)) {
+    return itemToCheckOut;
   }
 
-  const updatedItems = state
-    .update(itemId, item => item
-      .set(itemProperties.IS_CHECKED_OUT, true)
-      .set(itemProperties.ORIGINAL_TEXT, item.get(itemProperties.TEXT)));
-
-  return updatedItems;
+  return itemToCheckOut
+    .set(itemProperties.IS_CHECKED_OUT, true)
+    .set(itemProperties.ORIGINAL_TEXT, itemToCheckOut.get(itemProperties.TEXT));
 };
 
-const revertItem = (state, itemId) => {
-  const itemToRevert = state.get(itemId);
+const revertItem = itemToRevert => {
   if (!itemToRevert.get(itemProperties.IS_CHECKED_OUT)) {
-    return state;
+    return itemToRevert;
   }
 
-  const updatedItems = state
-    .update(itemId, item => item
-      .set(itemProperties.IS_CHECKED_OUT, false)
-      .set(itemProperties.TEXT, item.get(itemProperties.ORIGINAL_TEXT)));
-
-  return updatedItems;
+  return itemToRevert
+    .set(itemProperties.IS_CHECKED_OUT, false)
+    .set(itemProperties.TEXT, itemToRevert.get(itemProperties.ORIGINAL_TEXT));
 };
 
-const checkinItem = (state, itemId) => {
-  const itemToCheckin = state.get(itemId);
-  if (!itemToCheckin.get(itemProperties.IS_CHECKED_OUT)) {
-    return state;
+const checkItemIn = itemToCheckIn => {
+  if (!itemToCheckIn.get(itemProperties.IS_CHECKED_OUT)) {
+    return itemToCheckIn;
   }
 
-  const updatedItems = state
-    .update(itemId, item => item
-      .set(itemProperties.IS_CHECKED_OUT, false)
-      .set(itemProperties.ORIGINAL_TEXT, item.get(itemProperties.TEXT)));
-
-  return updatedItems;
+  return itemToCheckIn
+    .set(itemProperties.IS_CHECKED_OUT, false)
+    .set(itemProperties.ORIGINAL_TEXT, itemToCheckIn.get(itemProperties.TEXT));
 };
 
-const updateItem = (state, itemId, newText) => {
-  const itemToUpdate = state.get(itemId);
+const updateItem = (itemToUpdate, newText) => {
   if (!itemToUpdate.get(itemProperties.IS_CHECKED_OUT)) {
     throw new Error('Cannot update checked in item.');
   }
 
-  const updatedItems = state
-    .update(itemId, item => item.set(itemProperties.TEXT, newText));
+  return itemToUpdate
+    .set(itemProperties.TEXT, newText);
+};
 
-  return updatedItems;
+const handleSingleItemAction = (state, action) => {
+  switch (action.type) {
+    case actionTypes.ITEM_CHECKOUT: {
+      return checkItemOut(state);
+    }
+    case actionTypes.ITEM_REVERT: {
+      return revertItem(state);
+    }
+    case actionTypes.ITEM_CHECKIN: {
+      return checkItemIn(state);
+    }
+    case actionTypes.ITEM_UPDATE:
+      return updateItem(state, action.payload.newText);
+    default: {
+      return state;
+    }
+  }
 };
 
 const itemActionsReducer = (previousStoreState = Immutable.Map(), action) => {
@@ -77,20 +81,18 @@ const itemActionsReducer = (previousStoreState = Immutable.Map(), action) => {
     case actionTypes.ITEM_INSERT: {
       return insertItem(previousStoreState, action.payload.item);
     }
-    case actionTypes.ITEM_CHECKOUT: {
-      return checkoutItem(previousStoreState, action.payload.id);
-    }
-    case actionTypes.ITEM_REVERT: {
-      return revertItem(previousStoreState, action.payload.id);
-    }
-    case actionTypes.ITEM_CHECKIN: {
-      return checkinItem(previousStoreState, action.payload.id);
-    }
-    case actionTypes.ITEM_UPDATE: {
-      return updateItem(previousStoreState, action.payload.id, action.payload.newText);
-    }
     case actionTypes.ITEM_DELETE: {
       return deleteItem(previousStoreState, action.payload.id);
+    }
+    case actionTypes.ITEM_CHECKOUT:
+    case actionTypes.ITEM_REVERT:
+    case actionTypes.ITEM_CHECKIN:
+    case actionTypes.ITEM_UPDATE: {
+      const item = previousStoreState.get(action.payload.id);
+      const updatedItem = handleSingleItemAction(item, action);
+
+      return previousStoreState
+        .set(action.payload.id, updatedItem);
     }
     default: {
       return previousStoreState;
