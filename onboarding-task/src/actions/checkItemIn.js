@@ -1,8 +1,8 @@
-import {ITEM_CHECKIN} from './actionTypes';
+import actionTypes from './actionTypes';
 import {ID} from '../descriptors/itemProperties';
 
 const checkItemIn = (itemToCheckIn) => ({
-  type: ITEM_CHECKIN,
+  type: actionTypes.ITEM_CHECKIN,
   payload: {
     id: itemToCheckIn.get(ID)
   }

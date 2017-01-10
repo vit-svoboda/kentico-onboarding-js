@@ -1,7 +1,7 @@
-import {NEWITEM_UPDATE} from './actionTypes';
+import actionTypes from './actionTypes';
 
 const updateNewItem = (newText) => ({
-  type: NEWITEM_UPDATE,
+  type: actionTypes.NEWITEM_UPDATE,
   payload: {
     newText
   }

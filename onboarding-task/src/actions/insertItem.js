@@ -1,7 +1,7 @@
-import {ITEM_INSERT} from './actionTypes';
+import actionTypes from './actionTypes';
 
 const insertItem = text => ({
-  type: ITEM_INSERT,
+  type: actionTypes.ITEM_INSERT,
   payload: {
     text
   }

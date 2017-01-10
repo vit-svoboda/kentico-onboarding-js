@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import {ITEM_INSERT, ITEM_CHECKOUT, ITEM_REVERT, ITEM_CHECKIN, ITEM_UPDATE, ITEM_DELETE} from '../actions/actionTypes';
+import actionTypes from '../actions/actionTypes';
 import createGuid from '../utils/guidGenerator';
 import {ID, TEXT, IS_CHECKED_OUT, ORIGINAL_TEXT} from '../descriptors/itemProperties';
 
@@ -82,22 +82,22 @@ const updateItem = (state, itemId, newText) => {
 
 const itemActionsReducer = (previousStoreState = Immutable.Map(), action) => {
   switch (action.type) {
-    case ITEM_INSERT: {
+    case actionTypes.ITEM_INSERT: {
       return insertItem(previousStoreState, action.payload.text);
     }
-    case ITEM_CHECKOUT: {
+    case actionTypes.ITEM_CHECKOUT: {
       return checkoutItem(previousStoreState, action.payload.id);
     }
-    case ITEM_REVERT: {
+    case actionTypes.ITEM_REVERT: {
       return revertItem(previousStoreState, action.payload.id);
     }
-    case ITEM_CHECKIN: {
+    case actionTypes.ITEM_CHECKIN: {
       return checkinItem(previousStoreState, action.payload.id);
     }
-    case ITEM_UPDATE: {
+    case actionTypes.ITEM_UPDATE: {
       return updateItem(previousStoreState, action.payload.id, action.payload.newText);
     }
-    case ITEM_DELETE: {
+    case actionTypes.ITEM_DELETE: {
       return deleteItem(previousStoreState, action.payload.id);
     }
     default: {

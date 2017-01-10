@@ -1,8 +1,8 @@
-import {ITEM_DELETE} from './actionTypes';
+import actionTypes from './actionTypes';
 import {ID} from '../descriptors/itemProperties';
 
 const deleteItem = (itemToDelete) => ({
-  type: ITEM_DELETE,
+  type: actionTypes.ITEM_DELETE,
   payload: {
     id: itemToDelete.get(ID)
   }
