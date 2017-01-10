@@ -24,7 +24,7 @@ class NewItem extends React.Component {
   }
 }
 
-const mapStateToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     updateText: event => {
       const action = updateNewItem(event.target.value);
@@ -40,4 +40,4 @@ const mapStateToProps = (dispatch, ownProps) => {
   }
 };
 
-export default connect(null, mapStateToProps)(NewItem);
+export default connect(null, mapDispatchToProps)(NewItem);

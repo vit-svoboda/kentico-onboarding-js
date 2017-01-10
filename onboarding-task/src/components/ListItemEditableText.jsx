@@ -30,7 +30,7 @@ class ListItemEditableText extends React.Component {
   }
 }
 
-const mapStateToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     updateText: event => {
       const action = updateItem(ownProps.item, event.target.value);
@@ -51,4 +51,4 @@ const mapStateToProps = (dispatch, ownProps) => {
   }
 };
 
-export default connect(null, mapStateToProps)(ListItemEditableText);
+export default connect(null, mapDispatchToProps)(ListItemEditableText);

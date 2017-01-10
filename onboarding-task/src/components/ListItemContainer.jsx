@@ -34,7 +34,7 @@ class ListItemContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     checkOut: () => {
       if (!ownProps.item.get(IS_CHECKED_OUT)) {
@@ -45,4 +45,4 @@ const mapStateToProps = (dispatch, ownProps) => {
   }
 };
 
-export default connect(null, mapStateToProps)(ListItemContainer);
+export default connect(null, mapDispatchToProps)(ListItemContainer);
