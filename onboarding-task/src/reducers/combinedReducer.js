@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import ItemActionsReducer from './itemActionsReducer';
-import InsertFormActionsReducer from './insertFormActionsReducer';
+import itemActionsReducer from './itemActionsReducer';
+import insertFormActionsReducer from './insertFormActionsReducer';
 
 const combinedReducer = combineReducers({
-  items: ItemActionsReducer,
-  insertForm: InsertFormActionsReducer
+  items: itemActionsReducer,
+  insertForm: insertFormActionsReducer
 });
 
 export default combinedReducer;
