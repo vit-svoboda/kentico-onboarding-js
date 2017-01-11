@@ -50,7 +50,7 @@ const checkItemIn = itemToCheckIn => {
 
 const updateItem = (itemToUpdate, newText) => {
   if (!itemToUpdate.get(itemProperties.IS_CHECKED_OUT)) {
-    throw new Error('Cannot update checked in item.');
+    return itemToUpdate;
   }
 
   return itemToUpdate
