@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const action = updateItem(ownProps.item, event.target.value);
       dispatch(action);
     },
-    confirmChanges: text => {
+    confirmChanges: () => {
       const action = checkItemIn(ownProps.item);
       dispatch(action);
     },
