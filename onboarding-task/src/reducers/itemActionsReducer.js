@@ -3,6 +3,10 @@ import actionTypes from '../actions/actionTypes';
 import itemProperties from '../descriptors/itemProperties';
 
 const insertItem = (state, item) => {
+  if (typeof item === 'undefined') {
+    return state;
+  }
+
   const itemId = item.get(itemProperties.ID);
 
   return state
@@ -10,6 +14,11 @@ const insertItem = (state, item) => {
 };
 
 const deleteItem = (state, itemId) => {
+  const itemToDelete = state.get(itemId);
+  if (typeof itemToDelete === 'undefined' || !itemToDelete.get(itemProperties.IS_CHECKED_OUT)) {
+    return state;
+  }
+
   // Function delete() cannot be used since it reorders preserved items
   const preservedItems = state
     .filterNot((_, key) => key === itemId)
@@ -78,6 +87,10 @@ const handleSingleItemAction = (state, action) => {
 };
 
 const itemActionsReducer = (previousStoreState = Immutable.Map(), action) => {
+  if (typeof action.payload === 'undefined') {
+    return previousStoreState;
+  }
+
   switch (action.type) {
     case actionTypes.ITEM_INSERT: {
       return insertItem(previousStoreState, action.payload.item);
@@ -90,8 +103,11 @@ const itemActionsReducer = (previousStoreState = Immutable.Map(), action) => {
     case actionTypes.ITEM_CHECKIN:
     case actionTypes.ITEM_UPDATE: {
       const item = previousStoreState.get(action.payload.id);
-      const updatedItem = handleSingleItemAction(item, action);
+      if (typeof item === 'undefined') {
+        return previousStoreState;
+      }
 
+      const updatedItem = handleSingleItemAction(item, action);
       return previousStoreState
         .set(action.payload.id, updatedItem);
     }
