@@ -6,12 +6,12 @@ import createLogger from 'redux-logger';
 import reducer from './reducers/combinedReducer';
 import List from './components/List';
 
+const logger = createLogger();
+const storeEnhancers = applyMiddleware(logger);
+const store = createStore(reducer, storeEnhancers);
+
 class App extends Component {
   render() {
-    const logger = createLogger();
-    const storeEnhancers = applyMiddleware(logger);
-    const store = createStore(reducer, storeEnhancers);
-
     return (
       <Provider store={store}>
         <div>
