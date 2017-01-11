@@ -22,7 +22,7 @@ class ListItemContainer extends React.Component {
       : <EditableText item={this.props.item}/>;
 
     return (
-      <tr onClick={this.props.checkOut}>
+      <tr onClick={() => this.props.checkOut(this.props.item)}>
         <td>
           <div className="form-inline">
             <span>{this.props.itemOrder}.&nbsp;</span>
@@ -34,11 +34,11 @@ class ListItemContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    checkOut: () => {
-      if (!ownProps.item.get(itemProperties.IS_CHECKED_OUT)) {
-        const action = checkItemOut(ownProps.item);
+    checkOut: item => {
+      if (!item.get(itemProperties.IS_CHECKED_OUT)) {
+        const action = checkItemOut(item);
         dispatch(action);
       }
     }

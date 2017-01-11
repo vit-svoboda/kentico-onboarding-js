@@ -21,31 +21,32 @@ class ListItemEditableText extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <input type="text" className="form-control" value={this.props.item.get(itemProperties.TEXT)} onChange={this.props.updateText}/>
-        <button className="btn btn-primary" onClick={this.props.confirmChanges}>Save</button>
-        <button className="btn btn-default" onClick={this.props.revertChanges}>Cancel</button>
-        <button className="btn btn-danger" onClick={this.props.deleteItem}>Delete</button>
+        <input type="text" className="form-control" value={this.props.item.get(itemProperties.TEXT)}
+               onChange={event => this.props.updateText(this.props.item, event.target.value)}/>
+        <button className="btn btn-primary" onClick={() => this.props.confirmChanges(this.props.item)}>Save</button>
+        <button className="btn btn-default" onClick={() => this.props.revertChanges(this.props.item)}>Cancel</button>
+        <button className="btn btn-danger" onClick={() => this.props.deleteItem(this.props.item)}>Delete</button>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    updateText: event => {
-      const action = updateItem(ownProps.item, event.target.value);
+    updateText: (item, newText) => {
+      const action = updateItem(item, newText);
       dispatch(action);
     },
-    confirmChanges: () => {
-      const action = checkItemIn(ownProps.item);
+    confirmChanges: item => {
+      const action = checkItemIn(item);
       dispatch(action);
     },
-    revertChanges: () => {
-      const action = revertItem(ownProps.item);
+    revertChanges: item => {
+      const action = revertItem(item);
       dispatch(action);
     },
-    deleteItem: () => {
-      const action = deleteItem(ownProps.item);
+    deleteItem: item => {
+      const action = deleteItem(item);
       dispatch(action);
     }
   }

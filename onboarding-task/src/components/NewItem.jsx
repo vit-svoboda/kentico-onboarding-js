@@ -14,24 +14,24 @@ class NewItem extends React.Component {
     return (
       <div className="form-inline">
         <div className="form-group">
-          <input type="text" className="form-control" value={this.props.text} onChange={this.props.updateText}/>
+          <input type="text" className="form-control" value={this.props.text}
+                 onChange={event => this.props.updateText(event.target.value)}/>
         </div>
         <div className="form-group">
-          <button className="btn btn-default" onClick={this.props.insertItem}>Add</button>
+          <button className="btn btn-default" onClick={() => this.props.insertItem(this.props.text)}>Add</button>
         </div>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    updateText: event => {
-      const action = updateNewItem(event.target.value);
+    updateText: text => {
+      const action = updateNewItem(text);
       dispatch(action);
     },
-    insertItem: () => {
-      const text = ownProps.text;
+    insertItem: text => {
       const clearTextAction = updateNewItem('');
       const insertItemAction = insertItem(text);
       dispatch(clearTextAction);
