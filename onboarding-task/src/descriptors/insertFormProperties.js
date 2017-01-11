@@ -1,5 +1,5 @@
-class insertFormProperties {
-  static TEXT = 'text';
-}
+const insertFormProperties = {
+  TEXT: 'text'
+};
 
 export default insertFormProperties;
