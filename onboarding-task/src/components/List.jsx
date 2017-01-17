@@ -1,24 +1,45 @@
 import React from 'react';
-import assignment from './../../../assignment.gif';
+import {connect} from 'react-redux';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import ListItemContainer from './ListItemContainer';
+import NewItem from './NewItem';
+import itemProperties from '../descriptors/itemProperties';
+import insertFormProperties from '../descriptors/insertFormProperties';
 
 class List extends React.Component {
+  static propTypes = {
+    items: ImmutablePropTypes.map.isRequired,
+    insertForm: ImmutablePropTypes.contains({
+      [insertFormProperties.TEXT]: React.PropTypes.string.isRequired
+    }).isRequired
+  };
+
   render() {
+    const items = this
+      .props
+      .items
+      .valueSeq()
+      .map((itemToDisplay, index) => {
+        return <ListItemContainer item={itemToDisplay}
+                                  itemOrder={index + 1}
+                                  key={itemToDisplay.get(itemProperties.ID)}/>;
+      });
+
     return (
       <div className="row">
-        {/* TODO: You can delete the assignment part once you do not need it */}
-        <div className="row">
-          <div className="col-sm-12">
-            <p className="lead text-center">Desired functionality is captured on the gif image. </p>
-            <p className="lead text-center"><b>Note: </b>Try to make solution easily extensible (e.g. more displayed fields per item).</p>
-            <img src={assignment} alt="assignment" className="img--assignment" />
-          </div>
-        </div>
-
         <div className="row">
           <div className="col-sm-12 col-md-offset-2 col-md-8">
-            <pre>
-              // TODO: implement the list here :)
-            </pre>
+            <table className="table table-bordered">
+              <tbody>
+                {items}
+
+                <tr>
+                  <td>
+                    <NewItem text={this.props.insertForm.get(insertFormProperties.TEXT)}/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -26,4 +47,9 @@ class List extends React.Component {
   }
 }
 
-export default List;
+const mapStateToProps = store => ({
+  items: store.items,
+  insertForm: store.insertForm
+});
+
+export default connect(mapStateToProps)(List);
