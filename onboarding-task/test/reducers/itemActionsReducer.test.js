@@ -1,6 +1,6 @@
 import itemGenerator from '../testUtils/itemGenerator';
-import initialStateGenerator/* {createInitialState, checkInitialItems}*/ from '../testUtils/initialStateGenerator';
-import checkItem from '../testUtils/checkItem';
+import initialStateGenerator from '../testUtils/initialStateGenerator';
+import checkThatItem from '../testUtils/itemChecker';
 import properties from '../../src/descriptors/itemProperties';
 import actionTypes from '../../src/actions/actionTypes';
 import insertItem from '../../src/actions/insertItem';
@@ -48,7 +48,11 @@ describe('Test suite for handler of ITEM_INSERT action in itemActionsReducer', (
     const insertedItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(insertedItem, 'item text', itemId, false, 'item text');
+    checkThatItem(insertedItem)
+      .idIs(itemId)
+      .andTextIs('item text')
+      .andOriginalTextIs('item text')
+      .andIsNotCheckedOut();
   });
 });
 
@@ -65,7 +69,11 @@ describe('Test suite for handler of ITEM_DELETE action in itemActionsReducer', (
     const preservedItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(preservedItem, 'item to delete', itemId, false, 'item to delete');
+    checkThatItem(preservedItem)
+      .idIs(itemId)
+      .andTextIs('item to delete')
+      .andOriginalTextIs('item to delete')
+      .andIsNotCheckedOut();
   });
 
   it('Does not delete anything for non-existent item', () => {
@@ -107,7 +115,12 @@ describe('Test suite for handler of ITEM_CHECKOUT action in itemActionsReducer',
     const checkedOutItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(checkedOutItem, 'item to check-out', itemId, true, 'original text');
+
+    checkThatItem(checkedOutItem)
+      .idIs(itemId)
+      .andTextIs('item to check-out')
+      .andOriginalTextIs('original text')
+      .andIsCheckedOut();
   });
 
   it('Does not modify anything when item does not exist', () => {
@@ -134,7 +147,11 @@ describe('Test suite for handler of ITEM_CHECKOUT action in itemActionsReducer',
     const checkedOutItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(checkedOutItem, 'item to check-out', itemId, true, 'item to check-out');
+    checkThatItem(checkedOutItem)
+      .idIs(itemId)
+      .andTextIs('item to check-out')
+      .andOriginalTextIs('item to check-out')
+      .andIsCheckedOut();
   });
 });
 
@@ -151,7 +168,11 @@ describe('Test suite for handler of ITEM_REVERT action in itemActionsReducer', (
     const revertedItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(revertedItem, 'inconsistent state only for testing purposes', itemId, false, 'item to revert');
+    checkThatItem(revertedItem)
+      .idIs(itemId)
+      .andTextIs('inconsistent state only for testing purposes')
+      .andOriginalTextIs('item to revert')
+      .andIsNotCheckedOut();
   });
 
   it('Does not modify anything when item does not exist', () => {
@@ -178,7 +199,11 @@ describe('Test suite for handler of ITEM_REVERT action in itemActionsReducer', (
     const revertedItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(revertedItem, 'item to revert', itemId, false, 'item to revert');
+    checkThatItem(revertedItem)
+      .idIs(itemId)
+      .andTextIs('item to revert')
+      .andOriginalTextIs('item to revert')
+      .andIsNotCheckedOut();
   });
 });
 
@@ -196,7 +221,11 @@ describe('Test suite for handler of ITEM_CHECKIN action in itemActionsReducer', 
     const checkedInItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(checkedInItem, 'item to check-in', itemId, false, 'inconsistent state only for testing purposes');
+    checkThatItem(checkedInItem)
+      .idIs(itemId)
+      .andTextIs('item to check-in')
+      .andOriginalTextIs('inconsistent state only for testing purposes')
+      .andIsNotCheckedOut();
   });
 
   it('Does not modify anything when item does not exist', () => {
@@ -223,7 +252,11 @@ describe('Test suite for handler of ITEM_CHECKIN action in itemActionsReducer', 
     const checkedInItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(checkedInItem, 'edited item to check-in', itemId, false, 'edited item to check-in');
+    checkThatItem(checkedInItem)
+      .idIs(itemId)
+      .andTextIs('edited item to check-in')
+      .andOriginalTextIs('edited item to check-in')
+      .andIsNotCheckedOut();
   });
 });
 
@@ -244,7 +277,11 @@ describe('Test suite for handler of ITEM_UPDATE action in itemActionsReducer', (
     const updatedItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(updatedItem, 'item to update', itemId, false, 'item to update');
+    checkThatItem(updatedItem)
+      .idIs(itemId)
+      .andTextIs('item to update')
+      .andOriginalTextIs('item to update')
+      .andIsNotCheckedOut();
   });
 
   it('Does not modify anything when item does not exist', () => {
@@ -271,6 +308,10 @@ describe('Test suite for handler of ITEM_UPDATE action in itemActionsReducer', (
     const updatedItem = state.get(itemId);
     expect(state.size).toBe(2);
     initialStateGenerator.checkInitialItems(state);
-    checkItem(updatedItem, 'updated version #2', itemId, true, 'item to update');
+    checkThatItem(updatedItem)
+      .idIs(itemId)
+      .andTextIs('updated version #2')
+      .andOriginalTextIs('item to update')
+      .andIsCheckedOut();
   });
 });

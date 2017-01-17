@@ -1,6 +1,6 @@
 import Immutable from 'Immutable';
 import itemGenerator from './itemGenerator';
-import checkItem from './checkItem';
+import checkThatItem from './itemChecker';
 
 const defaultItemId = '00-00';
 const defaultItemText = 'default item';
@@ -13,7 +13,11 @@ const createInitialState = () => {
 const checkInitialItems = stateToCheck => {
   const item = stateToCheck.get(defaultItemId);
 
-  checkItem(item, defaultItemText, defaultItemId, false, defaultItemText);
+  checkThatItem(item)
+    .idIs(defaultItemId)
+    .andTextIs(defaultItemText)
+    .andOriginalTextIs(defaultItemText)
+    .andIsNotCheckedOut();
 };
 
 export default {
