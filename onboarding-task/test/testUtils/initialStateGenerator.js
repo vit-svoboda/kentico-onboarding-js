@@ -1,17 +1,26 @@
 import Immutable from 'Immutable';
 import itemGenerator from './itemGenerator';
-import checkItem from './checkItem';
+import checkThatItem from './itemChecker';
 
 const defaultItemId = '00-00';
 const defaultItemText = 'default item';
 
-export const createInitialState = () => {
+const createInitialState = () => {
   const item = itemGenerator(defaultItemText, defaultItemId);
   return Immutable.Map({[defaultItemId]: item});
 };
 
-export const checkInitialItems = stateToCheck => {
+const checkInitialItems = stateToCheck => {
   const item = stateToCheck.get(defaultItemId);
 
-  checkItem(item, defaultItemText, defaultItemId, false, defaultItemText);
+  checkThatItem(item)
+    .idIs(defaultItemId)
+    .andTextIs(defaultItemText)
+    .andOriginalTextIs(defaultItemText)
+    .andIsNotCheckedOut();
+};
+
+export default {
+  createInitialState,
+  checkInitialItems
 };
