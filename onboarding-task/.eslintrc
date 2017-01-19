@@ -24,7 +24,7 @@
     "AuthRocket": true
   },
   "extends": [
-    "react-app"
+    "airbnb"
   ],
   "rules": {
     // disabled for now. We need to discuss this in a team.

@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import * as assignment from './../../../assignment.gif';
 const assignment = require('./../../../assignment.gif');
 
 import TsComponent from './TsComponent';
