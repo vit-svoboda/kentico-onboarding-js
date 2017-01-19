@@ -28,6 +28,8 @@ You won't be added as a contributor to this repository. You have to fork it to o
 Now you have everything git-related set-up and you can start developing... 
 Please, commit with reasonable commit messages (http://chris.beams.io/posts/git-commit/), you can squash your commits as well. Feel free to create new branches when developing (task-1, 2 etc.) and merge them to `develop` when you want to submit a pull request.
 
+**IMPORTANT: ** Make sure to enable `eslint` and `tslint` tools in File > Settings (search for keywords). Specify path to `eslint` and `tslint` node packages that are located in `node_modules` inside of project folder (will be downloaded once you run `npm install`).
+
 ## How to run the project 
 **tl;dr**
 ```
