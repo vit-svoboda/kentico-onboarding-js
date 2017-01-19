@@ -69,8 +69,13 @@ Refactor the application to use ReduxJS.
   
 **IMPORTANT:** preserve Immutability!
 
+## [optoinal] Task 4
+Rewrite the app to Typescript.
+Write unit tests for your Redux logic (actionCreators and reducers -- even combined).
+
 ## Coding style
-Please follow this rules while developing: 
+ESlint and TSlint are already set-up for you, so you will see all the errors and warnings in console and also in your WebStorm IDE. Please follow this rules while developing: 
  - JavaScript file names are `lowerCamelCase`
  - one React component per file, name is `UpperCamelCase`, and has `.jsx` extension
  - use `'single quotes'` instead of `"double quotes"`
+ - more Draft-specific coding rules are specified in https://kentico.atlassian.net/wiki/display/KA/04b+-+JS+Draft+Conventions+--+DRAFT
