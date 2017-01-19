@@ -4,7 +4,7 @@ describe('Basic math', () => {
   });
 
   it('multiplies by zero corectly', () => {
-    expect(8*0).toBe(0);
+    expect(8 * 0).toBe(0);
   });
 });
 
