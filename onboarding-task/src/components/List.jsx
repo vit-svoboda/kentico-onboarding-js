@@ -1,9 +1,9 @@
-import * as React from 'react';
-const assignment = require('./../../../assignment.gif');
+import React, { Component } from 'react';
+import assignment from './../../../assignment.gif';
 
-import TsComponent from './TsComponent';
+import TsComponent from './TsComponent.tsx';
 
-class List extends React.Component<undefined, undefined> {
+class List extends Component {
   render() {
     return (
       <div className="row">
