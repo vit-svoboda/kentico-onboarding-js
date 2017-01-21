@@ -18,9 +18,10 @@ class EditableListItem extends Component {
   }
 
   editItem(newValue) {
-    const item = this.props.item;
+    const item = { ...this.props.item };
     item.value = newValue;
     this.props.onEdit(item);
+
     this.toggleEdit();
   }
 
