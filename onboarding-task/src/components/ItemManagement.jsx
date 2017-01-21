@@ -14,18 +14,20 @@ class ItemManagement extends Component {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
+
     this.props.onSubmit(this.state.value);
   }
 
   render() {
     return (
-      <div className="form-group">
+      <form className="form-group">
         <input type="text" value={this.state.value} className="form-control" onChange={this.handleChange} />
-        <input type="button" className="btn btn-primary" value="Save" onClick={this.handleSubmit} />
+        <input type="submit" className="btn btn-primary" value="Save" onClick={this.handleSubmit} />
         <input type="button" className="btn" value="Cancel" onClick={this.props.onCancel} />
         <input type="button" className="btn btn-danger" value="Delete" onClick={this.props.onDelete} />
-      </div>
+      </form>
     );
   }
 }

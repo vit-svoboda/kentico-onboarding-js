@@ -15,18 +15,22 @@ class NewListItem extends Component {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
+
     this.props.onAdd({ id: uuid(), value: this.state.value });
+
+    // Clear the texbox
     this.setState({ value: '' });
   }
 
   render() {
     return (
       <li className="list-group-item form-inline">
-        <div className="form-group">
+        <form className="form-group">
           <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Enter a new item." className="form-control" />
-          <input type="button" onClick={this.handleSubmit} value="Add" className="btn" />
-        </div>
+          <input type="submit" onClick={this.handleSubmit} value="Add" className="btn" />
+        </form>
       </li>
     );
   }
