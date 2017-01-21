@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import uuid from 'uuid';
 
-class NewListItem extends React.Component {
+class NewListItem extends Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +16,8 @@ class NewListItem extends React.Component {
   }
 
   handleSubmit() {
-    this.props.onAdd(this.state.value);
+    this.props.onAdd({ id: uuid(), value: this.state.value });
+    this.setState({ value: '' });
   }
 
   render() {
