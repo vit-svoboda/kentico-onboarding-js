@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
-import assignment from './../../../assignment.gif';
 
 import TsComponent from './TsComponent.tsx';
+import EditableListItem from './EditableListItem.jsx';
+import NewItem from './NewListItem.jsx';
 
 class List extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [
+        'Buy milk', 'Master React', 'Learn Redux', 'Help making Draft awesome',
+      ],
+    };
+
+    this.addItem = this.addItem.bind(this);
+  }
+
+  addItem(item) {
+    this.setState({ items: [...this.state.items, item] });
+  }
+
   render() {
     return (
       <div className="row">
@@ -15,18 +31,11 @@ class List extends Component {
         </div>
 
         <div className="row">
-          <div className="col-sm-12">
-            <p className="lead text-center">Desired functionality is captured on the gif image. </p>
-            <p className="lead text-center"><b>Note: </b>Try to make solution easily extensible (e.g. more displayed fields per item).</p>
-            <img src={assignment} alt="assignment" className="img--assignment" />
-          </div>
-        </div>
-
-        <div className="row">
           <div className="col-sm-12 col-md-offset-2 col-md-8">
-            <pre>
-              // TODO: implement the list here :)
-            </pre>
+            <ul className="list-group">
+              {this.state.items.map((item, index) => <EditableListItem key={index} index={index} item={item} />)}
+              <NewItem onAdd={this.addItem} />
+            </ul>
           </div>
         </div>
       </div>
