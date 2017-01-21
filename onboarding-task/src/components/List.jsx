@@ -1,33 +1,14 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 
+import initialState from '../store/initialState.js';
 import TsComponent from './TsComponent.tsx';
 import EditableListItem from './EditableListItem.jsx';
-import NewItem from './NewListItem.jsx';
+import NewListItem from './NewListItem.jsx';
 
 class List extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      items: [
-        {
-          id: uuid(),
-          value: 'Buy milk',
-        },
-        {
-          id: uuid(),
-          value: 'Master React',
-        },
-        {
-          id: uuid(),
-          value: 'Learn Redux',
-        },
-        {
-          id: uuid(),
-          value: 'Help making Draft awesome',
-        },
-      ],
-    };
+    this.state = initialState;
 
     this.addItem = this.addItem.bind(this);
     this.editItem = this.editItem.bind(this);
@@ -39,11 +20,9 @@ class List extends Component {
   }
 
   editItem(item) {
-    const index = this.state.items.findIndex(i => i.id === item.id);
-
-    // Spread the original collection to avoid state modifications.
     const items = [...this.state.items];
-    items[index] = item;
+    const itemIndex = items.findIndex(i => i.id === item.id);
+    items[itemIndex] = item;
 
     this.setState({ items });
   }
@@ -70,7 +49,7 @@ class List extends Component {
                   onEdit={this.editItem}
                   onDelete={this.deleteItem}
                 />)}
-              <NewItem onAdd={this.addItem} />
+              <NewListItem onAdd={this.addItem} />
             </ul>
           </div>
         </div>
