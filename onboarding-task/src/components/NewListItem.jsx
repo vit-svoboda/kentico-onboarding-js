@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import uuid from 'uuid';
 
 class NewListItem extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class NewListItem extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.onAdd({ id: uuid(), value: this.state.value });
+    this.props.onAdd(this.state.value);
 
     // Clear the texbox
     this.setState({ value: '' });

@@ -1,22 +1,12 @@
+
+import { Map } from 'immutable';
 import uuid from 'uuid';
 
 export default {
-  items: [
-    {
-      id: uuid(),
-      value: 'Buy milk',
-    },
-    {
-      id: uuid(),
-      value: 'Master React',
-    },
-    {
-      id: uuid(),
-      value: 'Learn Redux',
-    },
-    {
-      id: uuid(),
-      value: 'Help making Draft awesome',
-    },
-  ],
+  items: Map.of(
+    uuid(), 'Buy milk',
+    uuid(), 'Master React',
+    uuid(), 'Learn Redux',
+    uuid(), 'Help making Draft awesome',
+  ),
 };

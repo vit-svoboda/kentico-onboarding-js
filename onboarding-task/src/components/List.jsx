@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 
 import initialState from '../store/initialState.js';
 import TsComponent from './TsComponent.tsx';
@@ -16,19 +17,15 @@ class List extends Component {
   }
 
   addItem(item) {
-    this.setState({ items: [...this.state.items, item] });
+    this.setState({ items: this.state.items.set(uuid(), item) });
   }
 
-  editItem(item) {
-    const items = [...this.state.items];
-    const itemIndex = items.findIndex(i => i.id === item.id);
-    items[itemIndex] = item;
-
-    this.setState({ items });
+  editItem(key, value) {
+    this.setState({ items: this.state.items.set(key, value) });
   }
 
-  deleteItem(item) {
-    this.setState({ items: this.state.items.filter(i => i.id !== item.id) });
+  deleteItem(key) {
+    this.setState({ items: this.state.items.delete(key) });
   }
 
   render() {
@@ -43,9 +40,9 @@ class List extends Component {
         <div className="row">
           <div className="col-sm-12 col-md-offset-2 col-md-8">
             <ul className="list-group">
-              {this.state.items.map((item, index) =>
+              {this.state.items.entrySeq().map(([key, value], index) =>
                 <EditableListItem
-                  key={item.id} index={index} item={item}
+                  key={key} index={index} id={key} value={value}
                   onEdit={this.editItem}
                   onDelete={this.deleteItem}
                 />)}

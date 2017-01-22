@@ -18,19 +18,17 @@ class EditableListItem extends Component {
   }
 
   editItem(newValue) {
-    const item = { ...this.props.item };
-    item.value = newValue;
-    this.props.onEdit(item);
+    this.props.onEdit(this.props.id, newValue);
 
     this.toggleEdit();
   }
 
   deleteItem() {
-    this.props.onDelete(this.props.item);
+    this.props.onDelete(this.props.id);
   }
 
   render() {
-    const value = this.props.item.value;
+    const value = this.props.value;
 
     return (
       <li className="list-group-item form-inline">
@@ -52,7 +50,8 @@ class EditableListItem extends Component {
 
 EditableListItem.propTypes = {
   index: PropTypes.number.isRequired,
-  item: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+  id: PropTypes.any.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
