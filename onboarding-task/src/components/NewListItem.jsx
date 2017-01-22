@@ -1,4 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as itemActions from '../actions/itemActions.js';
 
 class NewListItem extends Component {
   constructor(props) {
@@ -17,7 +21,7 @@ class NewListItem extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.onAdd(this.state.value);
+    this.props.actions.itemCreated(this.state.value);
 
     // Clear the texbox
     this.setState({ value: '' });
@@ -36,7 +40,13 @@ class NewListItem extends Component {
 }
 
 NewListItem.propTypes = {
-  onAdd: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
-export default NewListItem;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(itemActions, dispatch),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(NewListItem);

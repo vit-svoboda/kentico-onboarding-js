@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import * as itemActions from '../actions/itemActions.js';
 import ItemManagement from './ItemManagement';
 
 class EditableListItem extends Component {
@@ -18,13 +21,13 @@ class EditableListItem extends Component {
   }
 
   editItem(newValue) {
-    this.props.onEdit(newValue, this.props.id);
+    this.props.actions.itemUpdated(this.props.id, newValue);
 
     this.toggleEdit();
   }
 
   deleteItem() {
-    this.props.onDelete(this.props.id);
+    this.props.actions.itemDeleted(this.props.id);
   }
 
   render() {
@@ -52,8 +55,13 @@ EditableListItem.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
   id: PropTypes.any.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
-export default EditableListItem;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(itemActions, dispatch),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(EditableListItem);
