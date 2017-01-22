@@ -18,7 +18,7 @@ class EditableListItem extends Component {
   }
 
   editItem(newValue) {
-    this.props.onEdit(this.props.id, newValue);
+    this.props.onEdit(newValue, this.props.id);
 
     this.toggleEdit();
   }

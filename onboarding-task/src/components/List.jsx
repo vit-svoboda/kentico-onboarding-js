@@ -11,17 +11,12 @@ class List extends Component {
     super(props);
     this.state = initialState;
 
-    this.addItem = this.addItem.bind(this);
-    this.editItem = this.editItem.bind(this);
+    this.upsertItem = this.upsertItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
   }
 
-  addItem(item) {
-    this.setState({ items: this.state.items.set(uuid(), item) });
-  }
-
-  editItem(key, value) {
-    this.setState({ items: this.state.items.set(key, value) });
+  upsertItem(value, key) {
+    this.setState({ items: this.state.items.set(key || uuid(), value) });
   }
 
   deleteItem(key) {
@@ -43,10 +38,10 @@ class List extends Component {
               {this.state.items.entrySeq().map(([key, value], index) =>
                 <EditableListItem
                   key={key} index={index} id={key} value={value}
-                  onEdit={this.editItem}
+                  onEdit={this.upsertItem}
                   onDelete={this.deleteItem}
                 />)}
-              <NewListItem onAdd={this.addItem} />
+              <NewListItem onAdd={this.upsertItem} />
             </ul>
           </div>
         </div>
