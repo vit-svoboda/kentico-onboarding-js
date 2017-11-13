@@ -13,8 +13,12 @@ before_install:
 script:
   - npm run build
   
+before_deploy:
+  - ls build
+  - cd ..
+  
 deploy:
   provider: surge
-  project: ../build/
+  project: ./onboarding-task/build/
   domain: diligent-oil.surge.sh
   on: features/deployment
