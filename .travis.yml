@@ -13,3 +13,7 @@ before_install:
 script:
   - npm run build
   
+deploy:
+  provider: surge
+  project: ./onboarding-task/public/
+  on: features/deployment
