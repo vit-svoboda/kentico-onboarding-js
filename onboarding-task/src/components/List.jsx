@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 
-import TsComponent from './TsComponent.tsx';
 import EditableListItem from './EditableListItem.jsx';
 import NewListItem from './NewListItem.jsx';
 
@@ -10,11 +9,6 @@ class List extends Component {
   render() {
     return (
       <div className="row">
-        <div className="row">
-          <div className="col-sm-12 text-center">
-            <TsComponent name="Fancy" />
-          </div>
-        </div>
 
         <div className="row">
           <div className="col-sm-12 col-md-offset-2 col-md-8">
