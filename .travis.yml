@@ -16,4 +16,5 @@ script:
 deploy:
   provider: surge
   project: ./onboarding-task/public/
+  domain: diligent-oil.surge.sh
   on: features/deployment
